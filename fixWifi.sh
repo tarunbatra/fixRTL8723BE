@@ -17,13 +17,13 @@ checkGit() {
 
 installGit() {
   echo "Installing git\n"
-  sudo apt-get install git >> /dev/null & loading
+  sudo apt-get install git >> /dev/null
 }
 
 cloneRepo() {
   echo "Downloading latest drivers from $repo"
-  if git clone $repo /tmp/rtlwifi_new_$$ &> /dev/null & pid=$!; then
-    loading $pid
+  if git clone $repo /tmp/rtlwifi_new_$$; then
+    echo "Drivers downloaded successfully"
   else
     echo "Download couldn't be completed. Exiting"
     exit 1
@@ -33,8 +33,7 @@ cloneRepo() {
 installDrivers() {
   cd /tmp/rtlwifi_new_$$ || (echo "Drivers not found"; exit 1)
   echo "Building drivers"
-  if make &> /dev/null && sudo make install &> /dev/null & pid=$!; then
-    loading $pid
+  if make && sudo make install; then
     echo "Drivers built successfully"
   else
     echo "Drivers couldn't be built. Exiting"
@@ -53,7 +52,7 @@ configureWiFi() {
 
 restartWiFi() {
   echo "Restarting WiFi"
-  if sudo modprobe -r rtl8723be &> /dev/null && sudo modprobe rtl8723be &> /dev/null; then
+  if sudo modprobe -r rtl8723be && sudo modprobe rtl8723be; then
     echo "WiFi restarted"
   else
     echo "Couldn't restart WiFi"
