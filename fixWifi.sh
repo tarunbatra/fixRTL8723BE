@@ -2,11 +2,6 @@
 
 repo="https://github.com/lwfinger/rtlwifi_new"
 
-loading() {
-  local pid= $! &> /dev/null || $1 &> /dev/null
-  while $pid; do for X in '-' '/' '|' '\'; do echo -en "\b$X"; sleep 0.1; done; done
-}
-
 checkGit() {
   if git --version  &> /dev/null; then
     echo "Git found"
