@@ -62,9 +62,9 @@ restartWiFi() {
 
 echo "Fixing Wifi"
 checkGit || installGit
-#cloneRepo
-#installDrivers
-#configureWiFi
+cloneRepo
+installDrivers
+configureWiFi
 restartWiFi
 echo "Your WiFi is fixed. Enjoy!"
 echo "If this doen't help, try changing rtl8723be.conf and repeating the process"
