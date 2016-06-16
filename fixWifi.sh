@@ -1,6 +1,7 @@
 #!/usr/bin env bash
 
-repo="https://github.com/lwfinger/rtlwifi_new"
+REPO="https://github.com/lwfinger/rtlwifi_new"
+CONFIG_DIR=`pwd`
 
 checkGit() {
   if git --version  &> /dev/null; then
@@ -16,8 +17,8 @@ installGit() {
 }
 
 cloneRepo() {
-  echo "Downloading latest drivers from $repo"
-  if git clone $repo /tmp/rtlwifi_new_$$; then
+  echo "Downloading latest drivers from $REPO"
+  if git clone $REPO /tmp/rtlwifi_new_$$; then
     echo "Drivers downloaded successfully"
   else
     echo "Download couldn't be completed. Exiting"
@@ -56,9 +57,9 @@ restartWiFi() {
 
 echo "Fixing Wifi"
 checkGit || installGit
-cloneRepo
+cloneRepo $REPO
 installDrivers
-configureWiFi
+configureWiFi $CONFIG_DIR
 restartWiFi
 echo "Your WiFi is fixed. Enjoy!"
 echo "If this doen't help, try changing rtl8723be.conf and repeating the process"
