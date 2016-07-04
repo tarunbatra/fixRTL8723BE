@@ -39,7 +39,7 @@ installDrivers() {
 configureWiFi() {
   echo "Configuring the WiFi settings"
   cd $1
-  if (cat ./rtl8723be.conf  | sudo tee /etc/modprobe.d/rtl8723be.conf); then
+  if (cat ./setup.conf  | sudo tee /etc/modprobe.d/rtl8723be.conf); then
     echo "WiFi settings configured"
   else
     echo "Wifi settings couldn't be configured"
