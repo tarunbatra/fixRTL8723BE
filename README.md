@@ -8,5 +8,4 @@ Just clone the project. To clone, run:
 
 ## Usage
 - `cd` to the project root
-- Run `bash install.js`
-
+- Run `bash install.sh`
