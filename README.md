@@ -6,6 +6,9 @@ Just clone this repo. To clone, run:
 
 `git clone https://github.com/tarunbatra/fixRTL8723BE`
 
+## Pre-requisite
+* `git`
+
 ## Usage
 - `cd` to the project root
 - Run `bash install.sh`

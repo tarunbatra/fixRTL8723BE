@@ -7,13 +7,9 @@ checkGit() {
   if git --version  &> /dev/null; then
     echo "Git found"
   else
-    echo "Git not found"
+    echo "Please install git and run this again"
+    exit 1
   fi
-}
-
-installGit() {
-  echo "Installing git\n"
-  sudo apt-get install git >> /dev/null
 }
 
 cloneRepo() {
@@ -56,7 +52,7 @@ restartWiFi() {
 }
 
 echo "Fixing Wifi"
-checkGit || installGit
+checkGit
 cloneRepo $REPO
 installDrivers
 configureWiFi $CONFIG_DIR
