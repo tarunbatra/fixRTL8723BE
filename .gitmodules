@@ -1,0 +1,3 @@
+[submodule "rtlwifi_new"]
+	path = rtlwifi_new
+	url = https://github.com/lwfinger/rtlwifi_new
