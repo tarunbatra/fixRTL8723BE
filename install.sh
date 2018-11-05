@@ -1,8 +1,9 @@
 #!/usr/bin env bash
 
+DRIVER="rtl8723be"
 REPO="https://github.com/lwfinger/rtlwifi_new"
-CONFIG_DIR=`pwd`
 DRIVER_DIR="rtlwifi_new"
+CONFIG_DIR=`pwd`
 
 checkGit() {
   if git --version  &> /dev/null; then
@@ -33,7 +34,7 @@ installDrivers() {
 configureWiFi() {
   echo "Configuring the WiFi settings"
   cd $1
-  if (cat ./setup.conf  | sudo tee /etc/modprobe.d/rtl8723be.conf); then
+  if (cat ./setup.conf  | sudo tee /etc/modprobe.d/$DRIVER.conf); then
     echo "WiFi settings configured"
   else
     echo "Wifi settings couldn't be configured"
@@ -42,7 +43,7 @@ configureWiFi() {
 
 restartWiFi() {
   echo "Restarting WiFi"
-  if sudo modprobe -r rtl8723be && sudo modprobe rtl8723be; then
+  if sudo modprobe -r $DRIVER && sudo modprobe $DRIVER; then
     echo "WiFi restarted"
   else
     echo "Couldn't restart WiFi"
@@ -55,5 +56,5 @@ installDrivers
 configureWiFi $CONFIG_DIR
 restartWiFi
 echo "Your WiFi is fixed. Enjoy!"
-echo "If this doen't help, try changing rtl8723be.conf and repeating the process"
+echo "If this doen't help, try changing setup.conf and repeating the process"
 exit 0
