@@ -4,10 +4,7 @@ Some HP laptops with **Realtek rtl8723be NICs** having one antenna face problems
 ## Installation
 Just clone this repo. To clone, run:
 
-`git clone https://github.com/tarunbatra/fixRTL8723BE`
-
-## Pre-requisite
-* `git`
+`git clone https://github.com/tarunbatra/fixRTL8723BE --recurse-submodules`
 
 ## Usage
 - `cd` to the project root
