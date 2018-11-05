@@ -2,6 +2,7 @@
 
 REPO="https://github.com/lwfinger/rtlwifi_new"
 CONFIG_DIR=`pwd`
+DRIVER_DIR="rtlwifi_new"
 
 checkGit() {
   if git --version  &> /dev/null; then
@@ -12,18 +13,15 @@ checkGit() {
   fi
 }
 
-cloneRepo() {
-  echo "Downloading latest drivers from $REPO"
-  if git clone $REPO /tmp/rtlwifi_new_$$; then
-    echo "Drivers downloaded successfully"
-  else
-    echo "Download couldn't be completed. Exiting"
-    exit 1
+verifyDrivers() {
+  echo "Verifying drivers"
+  if [ ! -d "$DRIVER_DIR" ]; then
+    checkGit && git submodule init
   fi
 }
 
 installDrivers() {
-  cd /tmp/rtlwifi_new_$$ || (echo "Drivers not found"; exit 1)
+  cd $DRIVER_DIR || (echo "Drivers not found"; exit 1)
   echo "Building drivers"
   if make && sudo make install; then
     echo "Drivers built successfully"
@@ -52,8 +50,7 @@ restartWiFi() {
 }
 
 echo "Fixing Wifi"
-checkGit
-cloneRepo $REPO
+verifyDrivers $REPO
 installDrivers
 configureWiFi $CONFIG_DIR
 restartWiFi
